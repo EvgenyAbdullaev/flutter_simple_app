@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'ui/screens/home_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -25,14 +27,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         primaryIconTheme: IconThemeData(color: Colors.black),
       ),
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text('SimpleApp'),
-          elevation: 0.0,
-        ),
-        body: Center(child: Text('Simple App')),
-      ),
+      home: HomeScreen(),
       //const MainScreen(),
     );
   }
