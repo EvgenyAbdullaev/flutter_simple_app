@@ -1,0 +1,50 @@
+CREATE TABLE category (
+    id INT NOT NULL PRIMARY KEY,
+    name TEXT,
+    img TEXT
+);
+
+CREATE TABLE coffee (
+    id INT NOT NULL PRIMARY KEY,
+    cat INT,
+    brand TEXT,
+    label TEXT,
+    price REAL,
+    discount REAL,
+    weight INT DEFAULT 1000,
+    img TEXT,
+    tt TEXT,
+    drink TEXT,
+    roast TEXT,
+    pack TEXT,
+    compound TEXT,
+    intensity TEXT,
+    origin TEXT,
+    life TEXT,
+    description TEXT
+);
+
+CREATE TABLE favorite (
+    id INT NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE userProfile(
+    name TEXT NOT NULL PRIMARY KEY,
+    phone TEXT,
+    email TEXT
+);
+
+getDiscountsList: SELECT * from coffee WHERE discount > 0 LIMIT 10;
+getPopularList: SELECT * from coffee WHERE id % 8 = 0 LIMIT 10;
+getByCategory(:id AS INT): SELECT * FROM coffee where cat = :id;
+getAllCategory: SELECT * FROM category;
+
+addFavorite(:id AS INT): INSERT OR IGNORE INTO favorite (id) VALUES (:id);
+remFavorite(:id AS INT): DELETE FROM favorite WHERE id = :id;
+isFavorite(:id AS INT): SELECT count(id) FROM favorite WHERE id = :id;
+getAllFavoriteList: SELECT * FROM coffee WHERE id IN (SELECT id FROM favorite);
+
+userInsert(:name AS TEXT, :phone AS TEXT, :email AS TEXT): INSERT OR IGNORE INTO userProfile (name, phone, email) VALUES (:name, :phone, :email);
+userUpdate(:name AS TEXT, :phone AS TEXT, :email AS TEXT): UPDATE userProfile SET name = :name, phone = :phone, email = :email;
+userSelectCount: SELECT count(name) FROM userProfile;
+userSelect: SELECT name, phone, email FROM userProfile;

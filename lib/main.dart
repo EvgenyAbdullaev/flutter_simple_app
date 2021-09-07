@@ -5,13 +5,21 @@ import 'package:provider/provider.dart';
 import 'navigation/app_state_manager.dart';
 import 'navigation/app_router.dart';
 import 'network/net_service.dart';
+import 'data/moor/m_repo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+
+  final repository = MoorRepo();
+  await repository.init();
+
+  runApp(MyApp(repository: repository,));
 }
 
 class MyApp extends StatefulWidget {
+  final MoorRepo repository;
+  const MyApp({required this.repository, Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -43,6 +51,11 @@ class _MyAppState extends State<MyApp> {
         Provider(
           lazy: false,
           create: (_) => _netService,
+        ),
+        Provider<MoorRepo>(
+          lazy: false,
+          create: (_) => widget.repository,
+          dispose: (_, MoorRepo repository) => repository.close(),
         ),
       ],
       child: MaterialApp(

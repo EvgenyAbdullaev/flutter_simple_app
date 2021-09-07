@@ -9,6 +9,8 @@ import '../../network/net_service.dart';
 import '../../network/net_models.dart';
 import '../../network/model_response.dart';
 
+import '../../data/moor/m_repo.dart';
+
 class SplashScreen extends StatefulWidget {
   static MaterialPage page() {
     return MaterialPage(
@@ -68,7 +70,17 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  void _loadedData(BuildContext context, APIAllQuery query) async {
+  void _loadedData(BuildContext context, APIAllQuery q) async {
+    final moorRepo = Provider.of<MoorRepo>(context);
+
+    q.clist.forEach((element) async {
+      await moorRepo.insertCoffee(element.coffee);
+    });
+
+    q.catalog.forEach((element) async {
+      await moorRepo.insertCategory(element.category);
+    });
+
     Provider.of<AppStateManager>(context, listen: false).initializeApp();
   }
 }
