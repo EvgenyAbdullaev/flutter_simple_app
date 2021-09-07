@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'ui/screens/home_screen.dart';
 import 'navigation/app_state_manager.dart';
 import 'navigation/app_router.dart';
 
@@ -55,7 +54,6 @@ class _MyAppState extends State<MyApp> {
           routerDelegate: _appRouter,
           backButtonDispatcher: RootBackButtonDispatcher(),
         ),
-        //const MainScreen(),
       ),
     );
 
