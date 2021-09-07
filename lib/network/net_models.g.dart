@@ -30,8 +30,8 @@ APIClist _$APIClistFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$APIClistToJson(APIClist instance) => <String, dynamic>{
-  'coffee': instance.coffee,
-};
+      'coffee': instance.coffee,
+    };
 
 APICoffee _$APICoffeeFromJson(Map<String, dynamic> json) {
   return APICoffee(
@@ -56,24 +56,24 @@ APICoffee _$APICoffeeFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$APICoffeeToJson(APICoffee instance) => <String, dynamic>{
-  'id': instance.id,
-  'cat': instance.cat,
-  'brand': instance.brand,
-  'label': instance.label,
-  'price': instance.price,
-  'discount': instance.discount,
-  'weight': instance.weight,
-  'img': instance.img,
-  'tt': instance.tt,
-  'drink': instance.drink,
-  'roast': instance.roast,
-  'pack': instance.pack,
-  'compound': instance.compound,
-  'intensity': instance.intensity,
-  'origin': instance.origin,
-  'life': instance.life,
-  'description': instance.description,
-};
+      'id': instance.id,
+      'cat': instance.cat,
+      'brand': instance.brand,
+      'label': instance.label,
+      'price': instance.price,
+      'discount': instance.discount,
+      'weight': instance.weight,
+      'img': instance.img,
+      'tt': instance.tt,
+      'drink': instance.drink,
+      'roast': instance.roast,
+      'pack': instance.pack,
+      'compound': instance.compound,
+      'intensity': instance.intensity,
+      'origin': instance.origin,
+      'life': instance.life,
+      'description': instance.description,
+    };
 
 APICatalog _$APICatalogFromJson(Map<String, dynamic> json) {
   return APICatalog(
@@ -99,19 +99,4 @@ Map<String, dynamic> _$APICategoryToJson(APICategory instance) =>
       'id': instance.id,
       'name': instance.name,
       'img': instance.img,
-    };
-
-APISimpleAnswer _$APISimpleAnswerFromJson(Map<String, dynamic> json) {
-  return APISimpleAnswer(
-    ans: json['ans'] as String,
-    ver: json['ver'] as String,
-    sic: json['sic'] as String,
-  );
-}
-
-Map<String, dynamic> _$APISimpleAnswerToJson(APISimpleAnswer instance) =>
-    <String, dynamic>{
-      'ans': instance.ans,
-      'ver': instance.ver,
-      'sic': instance.sic,
     };

@@ -108,21 +108,3 @@ class APICategory extends Equatable {
   @override
   List<Object?> get props => [id];
 }
-
-@JsonSerializable()
-class APISimpleAnswer {
-  factory APISimpleAnswer.fromJson(Map<String, dynamic> json) => _$APISimpleAnswerFromJson(json);
-  Map<String, dynamic> toJson() => _$APISimpleAnswerToJson(this);
-
-  final String ans;
-  final String ver;
-  final String sic;
-
-  APISimpleAnswer({
-    required this.ans,
-    required this.ver,
-    required this.sic
-  });
-}
-
-

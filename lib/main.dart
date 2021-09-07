@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'navigation/app_state_manager.dart';
 import 'navigation/app_router.dart';
+import 'network/net_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _appStateManager = AppStateManager();
+  final _netService = NetService.create();
 
   late final AppRouter _appRouter;
 
@@ -39,6 +41,10 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           create: (context) => _appStateManager,
+        ),
+        Provider(
+          lazy: false,
+          create: (_) => _netService,
         ),
       ],
       child: MaterialApp(
