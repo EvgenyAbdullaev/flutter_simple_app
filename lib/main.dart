@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import 'ui/screens/home_screen.dart';
+import 'navigation/app_state_manager.dart';
+import 'navigation/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _appStateManager = AppStateManager();
+
+  late final AppRouter _appRouter;
+
+  @override
+  void initState() {
+    _appRouter = AppRouter(appStateManager: _appStateManager);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -17,18 +36,28 @@ class MyApp extends StatelessWidget {
       statusBarBrightness: Brightness.light,
     ));
 
-    return MaterialApp(
-      title: 'SimpleApp',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-        primaryColor: Colors.white,
-        accentColor: Colors.amber,
-        brightness: Brightness.light,
-        primaryIconTheme: IconThemeData(color: Colors.black),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => _appStateManager,
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.amber,
+          primaryColor: Colors.white,
+          accentColor: Colors.amber,
+          brightness: Brightness.light,
+          primaryIconTheme: IconThemeData(color: Colors.black),
+        ),
+        home: Router(
+          routerDelegate: _appRouter,
+          backButtonDispatcher: RootBackButtonDispatcher(),
+        ),
+        //const MainScreen(),
       ),
-      home: HomeScreen(),
-      //const MainScreen(),
     );
+
   }
 }
