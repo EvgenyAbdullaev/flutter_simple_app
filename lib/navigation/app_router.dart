@@ -28,6 +28,12 @@ class AppRouter extends RouterDelegate
         if (appStateManager.isInitialized)
           HomeScreen.page(appStateManager.getCurrentTab),
 
+        if (appStateManager.isWebView)
+          WebViewScreen.page(appStateManager.webTitle, appStateManager.webURL),
+
+        if (appStateManager.isShowDetails && appStateManager.currentItem != null)
+          DetailsScreen.page(appStateManager.currentItem!),
+
       ],
     );
   }
@@ -35,6 +41,14 @@ class AppRouter extends RouterDelegate
   bool _handlePopPage(Route<dynamic> route, result) {
     if (!route.didPop(result)) {
       return false;
+    }
+
+    if (route.settings.name == PagesConst.webViewScreen) {
+      appStateManager.goToWebView(false, '', '');
+    }
+
+    if (route.settings.name == PagesConst.detailsScreen) {
+      appStateManager.showDetails(false, null);
     }
 
     return true;

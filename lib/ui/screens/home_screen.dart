@@ -6,6 +6,7 @@ import '../../navigation/pages_const.dart';
 import '../../navigation/app_state_manager.dart';
 
 import 'test_screen.dart';
+import 'promo_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static MaterialPage page(int currentTab) {
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    pageList.add(TestScreen(title: 'Home'));
+    pageList.add(PromoScreen());
     pageList.add(TestScreen(title: 'Catalog'));
     pageList.add(TestScreen(title: 'Cart'));
     pageList.add(TestScreen(title: 'Favorites'));
